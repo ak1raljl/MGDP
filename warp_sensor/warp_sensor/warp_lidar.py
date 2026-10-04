@@ -130,6 +130,9 @@ class WarpLidar:
 
     # @nvtx.annotate()
     def capture(self, debug=False):
+        # CUDA graph capture requires a CUDA device; on CPU launch the kernel directly.
+        if not wp.get_device(self.device).is_cuda:
+            debug = True
         if self.graph is None:
             if self.cfg.return_pointcloud:
                 self.create_render_graph_pointcloud(debug)

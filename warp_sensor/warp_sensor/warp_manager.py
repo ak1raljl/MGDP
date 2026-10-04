@@ -266,10 +266,10 @@ class WarpManager:
         
     def __load_mesh_from_gym(self, gym_terrain):
         self.warp_mesh = wp.Mesh(
-            points=wp.array(gym_terrain.vertices.flatten(), dtype=wp.vec3),
-            indices=wp.array(gym_terrain.triangles.flatten(), dtype=wp.int32)
+            points=wp.array(gym_terrain.vertices.flatten(), dtype=wp.vec3, device=self.device),
+            indices=wp.array(gym_terrain.triangles.flatten(), dtype=wp.int32, device=self.device)
         )
-        self.warp_mesh_id = wp.array([self.warp_mesh.id], dtype=wp.uint64)
+        self.warp_mesh_id = wp.array([self.warp_mesh.id], dtype=wp.uint64, device=self.device)
 
     def __update_position(self, sensor:SensorData):      
         sensor_p = sensor.offset_p

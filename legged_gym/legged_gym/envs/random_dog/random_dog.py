@@ -431,6 +431,10 @@ class Randomdog(CameraMixin, Legged_terrains, Legged_camera, Legged_rewards, Leg
             os.makedirs(save_dir, exist_ok=True)
             cv2.imwrite(os.path.join(save_dir, 'latest.png'), combined_bgr)
 
+        # MGDP_PANEL_GUI=0 -> PNG-only mode, no GUI windows (Qt/X11-unstable systems)
+        if os.environ.get('MGDP_PANEL_GUI', '1') == '0':
+            return
+
         if not getattr(self, '_depth_vis_window_ready', False):
             try:
                 cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
@@ -458,6 +462,10 @@ class Randomdog(CameraMixin, Legged_terrains, Legged_camera, Legged_rewards, Leg
         if save_dir:
             os.makedirs(save_dir, exist_ok=True)
             cv2.imwrite(os.path.join(save_dir, 'latest.png'), combined_bgr)
+
+        # MGDP_PANEL_GUI=0 -> PNG-only mode, no GUI windows (Qt/X11-unstable systems)
+        if os.environ.get('MGDP_PANEL_GUI', '1') == '0':
+            return
 
         if not getattr(self, '_height_vis_window_ready', False):
             try:
